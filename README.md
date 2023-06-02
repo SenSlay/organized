@@ -1,5 +1,5 @@
 # ORGANIZED 1.0
-#### Video Demo: https://www.youtube.com/watch?v=1ITltBLVgCw
+#### Video Demo:  https://www.youtube.com/watch?v=1ITltBLVgCw
 
 #### Description:
 
@@ -17,6 +17,7 @@ At first, I was very eager to start trying out different frameworks, libraries a
 
 I used Bootstrap 5.3 to help create the front-end of the website and made sure it is as responsive as possible on all screen types. While the website's current design may not be the most visually appealing, the effort was mainly focused on the website's functionality.
 
+## Key Features:
 - User Registration: The website supports user registration to allow individuals to have their own set of tasks and schedules. Each user is assigned a unique ID and username in the SQLite database.
 - Create and Manage Tasks: Users can easily create or delete tasks, assign due dates, and add descriptions.
 - Monthly Schedule View: The website provides a calendar view that has color-coded entries to help users visualize their tasks and schedule for the month.
