@@ -29,14 +29,14 @@ btnCollapse.forEach(function(btn) {
     });
 });
 
-// Reloads the page every 30 minutes to display any changes, if any
+// Reloads the page per interval to display any changes, if any
 setInterval(function() {
     // AJAX request
     fetch('/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest' // Include the X-Requested-With header
+            'X-Requested-With': 'XMLHttpRequest'
         },
         body: JSON.stringify({ someData: 'example' })
     })
