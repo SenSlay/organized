@@ -176,9 +176,9 @@
                         <h5 class="mb-1">{{ row["title"] }}</h5>
                         <p class="text-muted mb-1">{{ row["description"] }}</p>
 
-
-        
-                        <p class="text-muted fs-7 m-0">{{ row["due_date"] }}&nbsp;&nbsp;&nbsp;{{ row["due_time"] }}</p>
+                        {% if row["due_date"] %}
+                            <p class="text-muted fs-7 m-0">{{ row["due_date"] }}&nbsp;&nbsp;&nbsp;{{ row["due_time"] }}</p>
+                        {% endif %}
                     </div>
 
                     <form action="/" method="POST" class="col-1 align-self-center d-flex justify-content-center ms-auto">
