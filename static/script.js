@@ -26,6 +26,8 @@ btnCollapse.forEach(function(btn) {
         const icon = btn.querySelector('i');
         icon.classList.toggle('fa-chevron-down');
         icon.classList.toggle('fa-chevron-up');
+
+        console.log(test)
     });
 });
 
