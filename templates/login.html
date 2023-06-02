@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+   <div class="d-lg-flex mt-5">
+        <div class="col d-flex flex-column">
+            <img src="/static/images/enh-organized-slogan.png" alt="Logo" class="w-100 ">
+            <p>Organized is your ultimate task manager, designed to help you stay organized, focused, and in control of your daily life.
+                With it's user-friendly interface and features, Organized enables you to effortlessly manage your to-do lists, and track progress.
+            </p>
+            <p>Experience the joy of an organized life with Organized. <a href="/signup">Get Started!</a></p>
+        </div>
+
+        <div class="col d-flex justify-content-center">
+            <div class="w-75 bg-light p-5">
+                <h2>Log in</h2>
+                <p class="mb-5">Don't have an account? <a href="/signup">Sign up</a></p>
+                <form action="/login" method="post">
+                    <div class="mb-3">
+                        {% if msg1 %}
+                            <input autocomplete="off" autofocus class="mb-1 border-danger form-control has-error mx-auto w-100" id="username" name="username" placeholder="Username" type="text" value="{{ username }}">
+                            <p class="fs-7 text-start text-danger">{{ msg1 }}</p>
+
+                        {% else %}
+                            <input autocomplete="off" autofocus class="mb-1 form-control mx-auto w-100" id="username" name="username" placeholder="Username" type="text" value="{{ username }}">
+
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {% if msg2 %}
+                            <input class="mb-1 border-danger form-control has-error mx-auto w-100" id="password" name="password" placeholder="Password" type="password">
+                            <p class="fs-7 text-start text-danger">{{ msg2 }}</p>
+                        {% else %}
+                           <input class="mb-1 form-control mx-auto w-100" id="password" name="password" placeholder="Password" type="password">
+                        {% endif %}
+                    </div>
+                    <button class="btn btn-primary" type="submit">Log In</button>
+                </form>
+            </div>
+        </div>
+   </div>
+{% endblock %}

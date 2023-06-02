@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Calendar
+{% endblock %}
+
+{% block main %}
+    <div id="calendar"></div>
+
+    <script>
+        const calendarEl = document.getElementById('calendar');
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: [
+                {% for event in events %}
+                {
+                    {% if event['due_date'] and event['due_time'] %}
+                    title: '{{ event['title'] }}',
+                    start: '{{ event['due_date'] }}T{{ event['due_time']}}',
+                    {% elif event["due_time"] and not event['due_date'] %}
+                    title: '{{ event['title'] }}',
+                    start: '{{ current_date }}T{{ event['due_time'] }}',
+                    {% elif not event["due_time"] and not event['due_date'] %}
+                    title: '{{ event['title'] }}',
+                    start: '{{ current_date }}T{{ current_time }}',
+                    {% endif %}
+
+                    {% if event['class'] == "Today" %}
+                        color: '#ffa500',
+                    {% elif event['class'] == "Upcoming" %}
+                        color: '#0D6EFD',
+                    {% elif event['class'] == "Overdue" %}
+                        color: '#DC3545',
+                    {% endif %}
+                },
+                {% endfor %}
+            ],
+
+            eventTimeFormat: {
+                hour: 'numeric',
+                minute: '2-digit',
+                meridiem: 'short'
+            }
+        });
+
+        calendar.render();
+    </script>
+{% endblock %}

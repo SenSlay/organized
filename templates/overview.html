@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Overview
+{% endblock %}
+
+
+{% block main %}
+    <h2 class="pb-2 mb-0 border-bottom"> Tasks Overview </h2>
+
+    <div class="row mt-4">
+        <div class="col d-flex justify-content-center">
+            <div class="border w-75 bg-light p-2">
+                <h1>{{ completed_count }}</h1>
+                Completed Tasks
+            </div>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <div class="border w-75 bg-light p-2">
+                <h1>{{ pending_count }}</h1>
+                Pending Tasks
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 d-flex justify-content-center">
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+
+    <script>
+        var xValues = ["Today", "Upcoming", "Overdue", "Completed"];
+        var yValues = [{{ today_count }}, {{ upcoming_count }}, {{ overdue_count }}, {{ completed_count }}];
+        var barColors = [
+          "#ffa500",
+          "#0D6EFD",
+          "#DC3545",
+          "#198754"
+        ];
+
+        new Chart("myChart", {
+          type: "doughnut",
+          data: {
+            labels: xValues,
+            datasets: [{
+              backgroundColor: barColors,
+              data: yValues
+            }]
+          },
+          options: {
+            title: {
+              display: true,
+              text: "To-do"
+            }
+          }
+        });
+    </script>
+
+{% endblock%}

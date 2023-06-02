@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sign up
+{% endblock %}
+
+{% block main %}
+    <div class="d-flex justify-content-center">
+        <div class="w-lg-25 w-md-50 w-sm-75 bg-light p-5 mt-5">
+            <h2>Sign up</h2>
+            <p class="mb-5">Already have an account? <a href="/login">Log in</a></p>
+            <form action="/signup" method="post">
+                <div class="mb-3">
+                    {% if msg1 %}
+                        <input autocomplete="off" autofocus class="form-control has-error border-danger mx-auto w-100" id="username" name="username" placeholder="Username" type="text" value="{{ username }}">
+                        <p class="fs-7 text-start text-danger">{{ msg1 }}</p>
+                    {% else %}
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-100" id="username" name="username" placeholder="Username" type="text" value="{{ username }}">
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {% if msg2 %}
+                        <input class="form-control border-danger has-error mx-auto w-100" id="password" name="password" placeholder="Password" type="password">
+                        <p class="fs-7 text-start text-danger">{{ msg2 }}</p>
+                    {% else %}
+                        <input class="form-control mx-auto w-100" id="password" name="password" placeholder="Password" type="password">
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {% if msg3 %}
+                        <input class="form-control border-danger has-error mx-auto w-100" id="password" name="confirmation" placeholder="Confirm password" type="password">
+                        <p class="fs-7 text-start text-danger">{{ msg3 }}</p>
+                    {% else %}
+                        <input class="form-control mx-auto w-100" id="confirm-password" name="confirmation" placeholder="Confirm password" type="password">
+                    {% endif %}
+                </div>
+                <button class="btn btn-primary" type="submit">Sign up</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

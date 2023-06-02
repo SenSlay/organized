@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    To-do
+{% endblock %}
+
+{% block main %}
+   <div class="d-flex flex-column w-100 text-start">
+
+        <!-- Add button trigger modal -->
+        <button type="button" class="btn btn-primary fixedButton roundedFixedBtn" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+
+        <!-- Add task modal -->
+        <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-black">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addTaskLabel">To-do</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="addTask-modal" id="addTask">
+                        <form class="d-flex flex-column" action="/" method="POST" id="addTask-form">
+                            <input class="form-control mb-2" id="title" name="title" type="text" placeholder="Title" maxlength="50" required>
+
+                            <textarea class="form-control mb-3" id="description" name="description" rows="3" placeholder="Description..." maxlength="100"></textarea>
+
+                            <div class="d-flex">
+                                <input type="date" id="date" name="date" class="form-control ms-auto ">
+                                <input type="time" id="time" name="time" class="form-control " step="1">
+                                <input type="hidden" name="btn-identifier" value="addBtn">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary w-25" form="addTask-form">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Today to-do items section-->
+        <div class="d-flex pb-2 mb-0 border-bottom">
+            <button class="btn btnCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseToday" aria-expanded="false" aria-controls="collapseToday">
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <h3 class="col-sm-11" id="today-section">Today</h3>
+            <p class="col text-muted text-center align-self-center fs-5 mb-0 pb-2">{{ today_count }}</p>
+        </div>
+
+        <ul class="collapse show" id="collapseToday">
+            {% for row in todo if row["class"] == "Today" %}
+            <li>
+                <div class="row border p-2 item">
+                    <form action="/" method="POST" class="col-1 box">
+                        <input type="hidden" name="todo-id" value="{{ row['id'] }}">
+                        <button type="submit" class="btn iconBtn align-self-center" name="btn-identifier" value="checkbox">
+                            <i class="fa-regular fa-square checkbox tick" id="{{ row['id'] }}"></i>
+                        </button>
+                    </form>
+
+                    <div class="col-9 todo-item">
+                        <h5 class="mb-1">{{ row["title"] }}</h5>
+                        <p class="text-muted mb-1">{{ row["description"] }}</p>
+                        <p class="text-muted fs-7 m-0">{{ row["due_time"] }}</p>
+                    </div>
+
+                    <form action="/" method="POST" class="col-1 align-self-center d-flex justify-content-center ms-auto">
+                        <input type="hidden" name="todo-id" value="{{ row['id'] }}">
+                        <button class="btn btn-danger" name="btn-identifier" value="deleteBtn" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+
+        <!-- Upcoming to-do items section-->
+        <div class="d-flex pb-2 mb-0 border-bottom">
+            <button class="btn btnCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUpcoming" aria-expanded="false" aria-controls="collapseUpcoming">
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <h3 class="col-sm-11 text-primary" id="upcoming-section">Upcoming</h3>
+            <p class="col text-muted text-center align-self-center fs-5 mb-0 pb-2">{{ upcoming_count }}</p>
+        </div>
+
+        <ul class="collapse show" id="collapseUpcoming">
+            {% for row in todo if row["class"] == "Upcoming" %}
+            <li>
+                <div class="row border p-2 item">
+                    <form action="/" method="POST" class="col-1 box">
+                        <input type="hidden" name="todo-id" value="{{ row['id'] }}">
+                        <button type="submit" class="btn iconBtn align-self-center" name="btn-identifier" value="checkbox">
+                            <i class="fa-regular fa-square checkbox tick" id="{{ row['id'] }}"></i>
+                        </button>
+                    </form>
+
+                    <div class="col-9 todo-item">
+                        <h5 class="mb-1">{{ row["title"] }}</h5>
+                        <p class="text-muted mb-1">{{ row["description"] }}</p>
+                        <p class="text-muted fs-7 m-0">{{ row["due_date"] }}&nbsp;&nbsp;&nbsp;{{ row["due_time"] }}</p>
+                    </div>
+
+                    <form action="/" method="POST" class="col-1 align-self-center d-flex justify-content-center ms-auto">
+                        <input type="hidden" name="todo-id" value="{{ row['id']}}">
+                        <button class="btn btn-danger" name="btn-identifier" value="deleteBtn" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+
+        <!-- Overdue to-do items section-->
+        <div class="d-flex pb-2 mb-0 border-bottom">
+            <button class="btn btnCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOverdue" aria-expanded="false" aria-controls="collapseOverdue">
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <h3 class="col-sm-11 text-danger" id="overdue-section">Overdue</h3>
+            <p class="col text-muted text-center align-self-center fs-5 mb-0 pb-2">{{ overdue_count }}</p>
+        </div>
+
+        <ul class="collapse show" id="collapseOverdue">
+            {% for row in todo if row["class"] == "Overdue" %}
+            <li>
+                <div class="row border p-2 item">
+                    <form action="/" method="POST" class="col-1 box">
+                        <input type="hidden" name="todo-id" value="{{ row['id'] }}">
+                        <button type="submit" class="btn iconBtn align-self-center" name="btn-identifier" value="checkbox">
+                            <i class="fa-regular fa-square checkbox tick" id="{{ row['id'] }}"></i>
+                        </button>
+                    </form>
+
+                    <div class="col-9 todo-item">
+                        <h5 class="mb-1">{{ row["title"] }}</h5>
+                        <p class="text-muted mb-1">{{ row["description"] }}</p>
+                        <p class="text-danger fs-7 m-0">{{ row["due_date"] }}&nbsp;&nbsp;&nbsp;{{ row["due_time"] }}</p>
+                    </div>
+
+                    <form action="/" method="POST" class="col-1 align-self-center d-flex justify-content-center ms-auto">
+                        <input type="hidden" name="todo-id" value="{{ row['id']}}">
+                        <button class="btn btn-danger" name="btn-identifier" value="deleteBtn" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+
+        <!-- Completed to-do items section-->
+        <div class="d-flex pb-2 mb-0 border-bottom">
+            <button class="btn btnCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCompleted" aria-expanded="false" aria-controls="collapseCompleted">
+                <i class="fa-solid fa-chevron-up"></i>
+            </button>
+            <h3 class="col-sm-11 text-success" id="completed-section">Completed</h3>
+            <p class="col text-muted text-center align-self-center fs-5 mb-0 pb-2">{{ completed_count }}</p>
+        </div>
+
+        <ul class="collapse" id="collapseCompleted">
+            {% for row in todo if row["class"] == "Completed" %}
+            <li>
+                <div class="row border p-2 item">
+                    <form action="/" method="POST" class="col-1 box">
+                        <input type="hidden" name="todo-id" value="{{ row['id'] }}">
+                        <button type="submit" class="btn iconBtn align-self-center" name="btn-identifier" value="checkbox">
+                            <i class="fa-solid fa-square-check checkbox tick" id="{{ row['id'] }}"></i>
+                        </button>
+                    </form>
+
+                    <div class="col-9 todo-item checked">
+                        <h5 class="mb-1">{{ row["title"] }}</h5>
+                        <p class="text-muted mb-1">{{ row["description"] }}</p>
+                        <p class="text-muted fs-7 m-0">{{ row["due_date"] }}&nbsp;&nbsp;&nbsp;{{ row["due_time"] }}</p>
+                    </div>
+
+                    <form action="/" method="POST" class="col-1 align-self-center d-flex justify-content-center ms-auto">
+                        <input type="hidden" name="todo-id" value="{{ row['id']}}">
+                        <button class="btn btn-danger" name="btn-identifier" value="deleteBtn" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+   </div>
+{% endblock %}

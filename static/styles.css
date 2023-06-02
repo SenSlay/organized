@@ -1,0 +1,120 @@
+/* Media query for smaller screens*/
+@media (max-width: 576px) {
+    .addTask-bar {
+        display: none;
+    }
+
+    #today-section, #upcoming-section, #overdue-section, #completed-section {
+        flex: 0 0 auto;
+        width: 83.33333333%;
+    }
+}
+
+.item:hover{
+    background-color: #F8F9FA;
+}
+
+#today-section {
+    color: orange;
+}
+
+.fa-trash {
+    font-size: 24px;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+}
+
+.fixedButton{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.roundedFixedBtn{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.checkbox {
+    display: flex;
+    width: auto;
+    height: auto;
+    font-size: 25px;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.box {
+    display: inline-flex;
+    width: auto;
+    height: auto;
+    padding-bottom: 1.5rem!important;
+    justify-content: center;
+}
+
+.iconBtn {
+    padding: 0;
+    background: none;
+    border: none;
+    width: fit-content;
+    height: fit-content;
+}
+
+.iconBtn:hover {
+    color: black;
+}
+
+div.checked {
+    color: #555;
+    text-decoration: line-through;
+}
+
+
+button.delete {
+    width: 56px!important;
+    height: 56px!important;
+}
+
+form.box button {
+    box-shadow: none!important;
+    outline: none!important;
+}
+
+.fs-7 {
+    font-size: 14px!important;
+}
+
+.has-error:focus {
+    box-shadow: none;
+}
+
+.btn-lightgrey {
+    color: grey;
+    background-color: #D3D3D3;
+    border-color: #D3D3D3;
+}
+
+#date, #time {
+    cursor: pointer;
+}
+
+#title, #description, #date, #time{
+    outline: none;
+    box-shadow: none;
+}
+
+#addTask {
+    border-radius: 14px;
+}
