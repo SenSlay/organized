@@ -1,5 +1,5 @@
 # ORGANIZED 1.0
-#### Video Demo:  https://www.youtube.com/watch?v=1ITltBLVgCw
+#### Video Demo: https://www.youtube.com/watch?v=1ITltBLVgCw
 
 #### Description:
 
