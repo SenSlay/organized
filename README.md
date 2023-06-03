@@ -59,4 +59,4 @@ There are still a lot of things to add or improve with Organized 1.0:
 But, for now, I feel very proud of what I have created, and so, this was Organized 1.0.
 
 ## Contact:
-If you have any questions, suggestions, or feedback, feel free to reach out at  castroirvan@gmail.com
+If you have any questions, suggestions, or feedback, feel free to reach out at castroirvan@gmail.com
