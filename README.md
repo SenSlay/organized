@@ -1,4 +1,4 @@
-# ORGANIZED 1.0
+# ORGANIZED
 #### Video Demo: https://www.youtube.com/watch?v=1ITltBLVgCw
 
 #### Description:
